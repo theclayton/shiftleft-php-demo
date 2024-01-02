@@ -21,6 +21,10 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: snyk.sarif
+      - name: Snyk Monitor
+        run: snyk monitor --project-name="$GITHUB_REPOSITORY"
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_AUTH_TOKEN }}
           
   Snyk-OSS-Scan:
     runs-on: ubuntu-latest
@@ -28,6 +32,7 @@ jobs:
       - uses: actions/checkout@master
       - name: Run Snyk to check for open-source vulnerabilities
         uses: snyk/actions/php@master
+        continue-on-error: false
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_AUTH_TOKEN }}
         with:
@@ -39,6 +44,7 @@ jobs:
       - uses: actions/checkout@master
       - name: Run Snyk to check for container vulnerabilities
         uses: snyk/actions/php@master
+        continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_AUTH_TOKEN }}
         with:
@@ -55,5 +61,3 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_AUTH_TOKEN }}
         with:
           command: iac test
-     
-
