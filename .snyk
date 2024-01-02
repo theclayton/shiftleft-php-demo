@@ -1,0 +1,5 @@
+ignore:
+  SNYK-PHP-PHENXPHPFONTLIB-474111:
+    - dompdf/dompdf@0.6.2 > phenx/php-font-lib@0.2.2:
+        reason: "test ignore"
+        expires: "2024-01-4T14:26:34.404Z"
