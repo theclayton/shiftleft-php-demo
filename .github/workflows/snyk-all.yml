@@ -1,0 +1,74 @@
+name: snyk-all
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  Snyk-Code-Scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Run Snyk to check for code vulnerabilities
+        uses: snyk/actions/php@master
+        continue-on-error: false # Set to 'true', to make sure that SARIF upload gets called on failure
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_AUTH_TOKEN }}
+        with:
+          args: --sarif-file-output=snyk.sarif
+          command: code test # for code analysis (other options: test (SSO), container, iac)
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: snyk.sarif
+
+
+
+  Snyk-Monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Snyk Monitor
+        uses: snyk/actions/php@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_AUTH_TOKEN }}
+        with:
+          args: --project-name="$GITHUB_REPOSITORY"
+          command: monitor 
+       
+
+  Snyk-OSS-Scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Run Snyk to check for open-source vulnerabilities
+        uses: snyk/actions/php@master
+        continue-on-error: false
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_AUTH_TOKEN }}
+        with:
+          command: test
+
+  Snyk-Container-Scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Run Snyk to check for container vulnerabilities
+        uses: snyk/actions/php@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_AUTH_TOKEN }}
+        with:
+          command: container test
+
+  Snyk-IaC-Scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Run Snyk to check for IaC vulnerabilities
+        uses: snyk/actions/php@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_AUTH_TOKEN }}
+        with:
+          command: iac test
