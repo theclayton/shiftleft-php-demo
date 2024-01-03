@@ -31,3 +31,11 @@ ignore:
     - login.php:
         reason: "test ignore"
         expires: "2024-01-4"
+  sql-injection:
+    - login.php:
+        reason: "test ignore"
+        expires: "2024-01-4"
+  issue-c395ace6-9241-4514-b31d-7b20fc53538e:
+    - login.php:
+      reason: "test ignore"
+      expires: "2024-01-4"
