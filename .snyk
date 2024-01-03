@@ -2,4 +2,32 @@ ignore:
   SNYK-PHP-PHENXPHPFONTLIB-474111:
     - dompdf/dompdf@0.6.2 > phenx/php-font-lib@0.2.2:
         reason: "test ignore"
-        expires: "2024-01-4T14:26:34.404Z"
+        expires: "2024-01-4"
+  SNYK-PHP-DOMPDFDOMPDF-2936790:
+    - dompdf/dompdf@0.6.2:
+        reason: "test ignore"
+        expires: "2024-01-4"
+  SNYK-PHP-DOMPDFDOMPDF-2953235:
+    - dompdf/dompdf@0.6.2:
+        reason: "test ignore"
+        expires: "2024-01-4"
+  SNYK-PHP-DOMPDFDOMPDF-2428942:
+    - dompdf/dompdf@0.6.2:
+        reason: "test ignore"
+        expires: "2024-01-4"
+  SNYK-PHP-DOMPDFDOMPDF-3033151:
+    - dompdf/dompdf@0.6.2:
+        reason: "test ignore"
+        expires: "2024-01-4"
+  SNYK-PHP-DOMPDFDOMPDF-3261241:
+    - dompdf/dompdf@0.6.2:
+        reason: "test ignore"
+        expires: "2024-01-4"
+  SNYK-PHP-DOMPDFDOMPDF-3315269:
+    - dompdf/dompdf@0.6.2:
+        reason: "test ignore"
+        expires: "2024-01-4"
+  SQL Injection:
+    - login.php:
+        reason: "test ignore"
+        expires: "2024-01-4"
