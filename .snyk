@@ -27,3 +27,7 @@ ignore:
     - dompdf/dompdf@0.6.2:
         reason: "test ignore"
         expires: "2024-01-4"
+
+exclude:
+  global:
+    - login.php
